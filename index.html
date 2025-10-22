@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Infinity - ダイス・インフィニティ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen text-white">
+    <!-- ヘッダー -->
+    <header class="bg-black bg-opacity-50 backdrop-blur-sm p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl md:text-3xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+                🎲 Dice Infinity
+            </h1>
+            <div class="flex gap-2">
+                <button id="saveBtn" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors text-sm md:text-base">
+                    💾 Save
+                </button>
+                <button id="resetBtn" class="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg transition-colors text-sm md:text-base">
+                    🔄 Reset
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-6 md:py-8">
+        <!-- ポイント表示エリア -->
+        <section class="bg-black bg-opacity-40 backdrop-blur-md rounded-2xl p-6 mb-6 border-2 border-yellow-500 shadow-2xl">
+            <div class="text-center">
+                <h2 class="text-lg md:text-xl text-yellow-400 mb-2">Current Points</h2>
+                <div id="currentPoints" class="text-4xl md:text-6xl font-bold mb-4 text-yellow-300">0</div>
+                <div class="flex justify-center gap-4 md:gap-8 text-sm md:text-base">
+                    <div>
+                        <span class="text-gray-400">DPS:</span>
+                        <span id="dps" class="text-green-400 font-semibold">0</span>
+                    </div>
+                    <div>
+                        <span class="text-gray-400">Total Earned:</span>
+                        <span id="totalEarned" class="text-purple-400 font-semibold">0</span>
+                    </div>
+                    <div id="cpDisplay" class="hidden">
+                        <span class="text-gray-400">Celestial Points:</span>
+                        <span id="celestialPoints" class="text-cyan-400 font-semibold">0</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- メインダイスエリア -->
+        <section class="bg-black bg-opacity-40 backdrop-blur-md rounded-2xl p-8 mb-6 border-2 border-purple-500 shadow-2xl">
+            <div class="text-center">
+                <div class="mb-4">
+                    <span class="text-xl md:text-2xl text-purple-300">Current Dice:</span>
+                    <span id="currentDiceType" class="text-2xl md:text-3xl font-bold text-yellow-400">D6</span>
+                </div>
+
+                <!-- サイコロ本体 -->
+                <div class="flex justify-center mb-6">
+                    <button id="mainDice" class="dice-button relative">
+                        <div class="dice-face text-6xl md:text-8xl">
+                            🎲
+                        </div>
+                    </button>
+                </div>
+
+                <div id="lastRoll" class="text-2xl md:text-3xl font-bold mb-2 text-green-400 min-h-[2rem]"></div>
+                <p class="text-gray-400 text-sm md:text-base">Click the dice to roll!</p>
+            </div>
+        </section>
+
+        <!-- アップグレードエリア -->
+        <section class="bg-black bg-opacity-40 backdrop-blur-md rounded-2xl p-6 border-2 border-blue-500 shadow-2xl">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 text-center text-blue-300">⬆️ Upgrades</h2>
+
+            <!-- タブ切り替え -->
+            <div class="flex flex-wrap gap-2 mb-6 justify-center">
+                <button class="upgrade-tab active" data-tab="basic">Basic</button>
+                <button class="upgrade-tab" data-tab="evolution">Evolution</button>
+                <button class="upgrade-tab" data-tab="multiplier">Multiplier</button>
+                <button class="upgrade-tab" data-tab="special">Special</button>
+                <button class="upgrade-tab" data-tab="prestige">Prestige</button>
+            </div>
+
+            <!-- 基礎アップグレード -->
+            <div id="tab-basic" class="upgrade-tab-content active">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="basicUpgrades">
+                    <!-- JavaScriptで動的生成 -->
+                </div>
+            </div>
+
+            <!-- 進化アップグレード -->
+            <div id="tab-evolution" class="upgrade-tab-content hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="evolutionUpgrades">
+                    <!-- JavaScriptで動的生成 -->
+                </div>
+            </div>
+
+            <!-- マルチプライヤーアップグレード -->
+            <div id="tab-multiplier" class="upgrade-tab-content hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="multiplierUpgrades">
+                    <!-- JavaScriptで動的生成 -->
+                </div>
+            </div>
+
+            <!-- 特殊アップグレード -->
+            <div id="tab-special" class="upgrade-tab-content hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="specialUpgrades">
+                    <!-- JavaScriptで動的生成 -->
+                </div>
+            </div>
+
+            <!-- プレステージアップグレード -->
+            <div id="tab-prestige" class="upgrade-tab-content hidden">
+                <div class="mb-6 p-4 bg-cyan-900 bg-opacity-50 rounded-lg border border-cyan-500">
+                    <h3 class="text-xl font-bold mb-2 text-cyan-300">🌟 Prestige System</h3>
+                    <p class="text-sm text-gray-300 mb-4">
+                        Reset your progress to gain Celestial Points for permanent bonuses!
+                    </p>
+                    <div class="mb-2">
+                        <span class="text-gray-400">Celestial Points on Prestige:</span>
+                        <span id="prestigeReward" class="text-cyan-400 font-bold">0 CP</span>
+                    </div>
+                    <button id="prestigeBtn" class="w-full px-6 py-3 bg-gradient-to-r from-cyan-600 to-purple-600 hover:from-cyan-700 hover:to-purple-700 rounded-lg font-bold text-lg transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none">
+                        Prestige Now!
+                    </button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="prestigeUpgrades">
+                    <!-- JavaScriptで動的生成 -->
+                </div>
+            </div>
+        </section>
+
+        <!-- プレステージボタン（条件達成時に表示） -->
+        <div id="prestigeAlert" class="hidden mt-6 bg-gradient-to-r from-cyan-600 to-purple-600 rounded-2xl p-6 text-center border-2 border-cyan-400 shadow-2xl animate-pulse">
+            <h3 class="text-2xl font-bold mb-2">🌟 Prestige Available! 🌟</h3>
+            <p class="mb-4">You've reached 1,000,000 points! You can now prestige to gain Celestial Points!</p>
+        </div>
+    </main>
+
+    <footer class="text-center py-6 text-gray-400 text-sm">
+        <p>Dice Infinity v1.0 - Made with Claude Code</p>
+    </footer>
+
+    <script src="game.js"></script>
+</body>
+</html>

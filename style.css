@@ -1,0 +1,212 @@
+/* カスタムアニメーションとスタイル */
+
+/* ダイスボタン */
+.dice-button {
+    background: linear-gradient(145deg, #1e1b4b, #4c1d95);
+    border: 3px solid #fbbf24;
+    border-radius: 20px;
+    padding: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(251, 191, 36, 0.3);
+}
+
+.dice-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(251, 191, 36, 0.5);
+}
+
+.dice-button:active {
+    transform: scale(0.95);
+}
+
+/* ダイス回転アニメーション */
+.dice-rolling {
+    animation: diceRoll 0.5s ease-in-out;
+}
+
+@keyframes diceRoll {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(90deg) scale(1.1);
+    }
+    50% {
+        transform: rotate(180deg) scale(1.2);
+    }
+    75% {
+        transform: rotate(270deg) scale(1.1);
+    }
+}
+
+/* ポイント獲得アニメーション */
+.point-gained {
+    animation: pointPop 0.6s ease-out;
+}
+
+@keyframes pointPop {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+        color: #fde047;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* クリティカルヒット */
+.critical-hit {
+    animation: criticalFlash 0.5s ease-out;
+}
+
+@keyframes criticalFlash {
+    0%, 100% {
+        background-color: transparent;
+    }
+    50% {
+        background-color: rgba(239, 68, 68, 0.3);
+    }
+}
+
+/* フローティングテキスト */
+.floating-text {
+    position: fixed;
+    font-size: 2rem;
+    font-weight: bold;
+    pointer-events: none;
+    z-index: 1000;
+    animation: floatUp 1s ease-out forwards;
+}
+
+@keyframes floatUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100px) scale(1.5);
+    }
+}
+
+/* アップグレードカード */
+.upgrade-card {
+    background: linear-gradient(145deg, #1e293b, #334155);
+    border: 2px solid #475569;
+    border-radius: 12px;
+    padding: 1rem;
+    transition: all 0.3s ease;
+}
+
+.upgrade-card:hover {
+    border-color: #fbbf24;
+    box-shadow: 0 5px 20px rgba(251, 191, 36, 0.3);
+    transform: translateY(-2px);
+}
+
+.upgrade-card.affordable {
+    border-color: #22c55e;
+    background: linear-gradient(145deg, #1e293b, #064e3b);
+}
+
+.upgrade-card.affordable:hover {
+    border-color: #4ade80;
+    box-shadow: 0 5px 20px rgba(34, 197, 94, 0.4);
+}
+
+.upgrade-card.locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.upgrade-card button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* タブスタイル */
+.upgrade-tab {
+    padding: 0.5rem 1rem;
+    background-color: #1e293b;
+    border: 2px solid #475569;
+    border-radius: 8px;
+    color: #94a3b8;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.upgrade-tab:hover {
+    border-color: #fbbf24;
+    color: #fbbf24;
+}
+
+.upgrade-tab.active {
+    background: linear-gradient(145deg, #4c1d95, #7c3aed);
+    border-color: #a78bfa;
+    color: white;
+}
+
+.upgrade-tab-content {
+    display: none;
+}
+
+.upgrade-tab-content.active {
+    display: block;
+}
+
+/* パルスエフェクト */
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(34, 211, 238, 0.8);
+    }
+}
+
+.animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* レスポンシブ調整 */
+@media (max-width: 768px) {
+    .dice-button {
+        padding: 1.5rem;
+    }
+
+    .dice-face {
+        font-size: 4rem !important;
+    }
+
+    .floating-text {
+        font-size: 1.5rem;
+    }
+}
+
+/* スクロールバーのスタイル */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1e293b;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #4c1d95, #7c3aed);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #5b21b6, #8b5cf6);
+}
+
+/* 数値フォーマット用 */
+.number-display {
+    font-variant-numeric: tabular-nums;
+}
